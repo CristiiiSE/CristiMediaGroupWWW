@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studown – User Safety</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0f1220;
+      --card: #161a2e;
+      --primary: #7c7cff;
+      --secondary: #a1a1ff;
+      --text: #f2f4ff;
+      --muted: #b6b9ff;
+      --border: rgba(255,255,255,0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(1200px 600px at 10% -10%, #1a1f44, transparent), var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 96px 24px 64px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      margin: 0 0 12px;
+      letter-spacing: -0.02em;
+    }
+
+    header p {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px 96px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      backdrop-filter: blur(6px);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      border-color: rgba(124,124,255,0.4);
+    }
+
+    .card h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #0f1220;
+      flex-shrink: 0;
+    }
+
+    .card p {
+      margin: 0;
+      color: #e6e8ff;
+      font-size: 0.98rem;
+    }
+
+    section.support {
+      margin-top: 64px;
+      text-align: center;
+    }
+
+    section.support h2 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    section.support p {
+      color: var(--muted);
+      max-width: 640px;
+      margin: 0 auto 24px;
+    }
+
+    .contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: #0f1220;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .contact:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(124,124,255,0.35);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding-top: 72px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Studown User Safety</h1>
+    <p>
+      Studown is built to support students in a calm, secure, and distraction‑free environment.
+      Your safety, privacy, and wellbeing are core principles of the app.
+    </p>
+  </header>
+
+  <main>
+    <div class="grid">
+      <div class="card">
+        <h2><span class="icon">🛡️</span>No Social Interaction</h2>
+        <p>
+          Studown has no chat, comments, profiles, or social features. Users cannot contact or
+          interact with others, removing risks such as harassment, bullying, or unwanted contact.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2><span class="icon">📵</span>Safe & Appropriate Content</h2>
+        <p>
+          All content shown in Studown is predefined and study‑related. The app does not display
+          violent, sexual, hateful, or harmful material of any kind.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2><span class="icon">🔒</span>Minimal Data Usage</h2>
+        <p>
+          Exam dates are stored locally on your device only. Studown does not require personal
+          information such as name, email address, age, or location.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2><span class="icon">📊</span>Anonymous Analytics</h2>
+        <p>
+          Anonymous usage analytics are used to improve the app experience (e.g. exam set or
+          cleared). No data is used to personally identify users.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2><span class="icon">🔔</span>Optional Notifications</h2>
+        <p>
+          Notifications are limited to motivational study reminders. You can disable them at
+          any time through your device settings.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2><span class="icon">👨‍🎓</span>General Audience</h2>
+        <p>
+          Studown is suitable for students of all ages. The app does not target, exploit, or
+          expose minors to inappropriate content or functionality.
+        </p>
+      </div>
+    </div>
+
+    <section class="support">
+      <h2>Need Help or Have Concerns?</h2>
+      <p>
+        If you experience any issues or have questions regarding safety or privacy, you can
+        contact support directly.
+      </p>
+      <a class="contact" href="mailto:cristian@cristimediagroup.com">
+        Contact Support
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 Studown · Cristi Media Group
+  </footer>
+
+</body>
+</html>
