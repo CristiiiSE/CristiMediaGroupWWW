@@ -1,8 +1,23 @@
 [
   {
+    "version": "1.8.0",
+    "date": "Apr 10, 2026",
+    "title": "Dashboard",
+    "description": "In this update, we are introducing a fresh new dashboard when you open the app, giving you a quick overview of everything. We've also included various stability improvements for a smoother experience.",
+    "type": "feature",
+    "isMajor": true
+  },{
+    "version": "1.7.0",
+    "date": "Mar 15, 2026",
+    "title": "Backup&Restore",
+    "description": "In this update, you can now log your grades after an exam or test to easily track your study progress. We've also added the ability to create a local backup of your data, perfect for when you switch phones.",
+    "type": "feature",
+    "isMajor": true
+  },
+  {
     "version": "1.6.0",
     "date": "Feb 10, 2026",
-    "title": "Pomodoro Timer 🍅",
+    "title": "Pomodoro Timer",
     "description": "Stay focused! We've added a brand new Pomodoro timer to help you manage your study sessions effectively.",
     "type": "feature",
     "isMajor": true
