@@ -166,46 +166,56 @@
     }
     .btn-ghost:hover { border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.04); }
 
-    /* ─── STUDOWN SECTION ─── */
-    .studown-section {
+    /* ─── APP SECTIONS (shared styles for studown + obsidian) ─── */
+    .app-section {
       padding: 6rem 0;
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
+    }
+    .app-section.alt-bg {
       background: var(--bg2);
     }
-    .studown-grid {
+    .app-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 5rem;
       align-items: center;
     }
-    .studown-tagline {
+    /* Flip layout for the second app */
+    .app-grid.flipped .app-visual { order: -1; }
+
+    .app-tagline {
       font-family: 'Syne', sans-serif;
       font-size: 1rem; color: var(--accent2);
       font-weight: 600; margin-bottom: 1.2rem;
     }
-    .studown-desc {
+    .app-desc {
       color: var(--muted); font-size: .97rem;
       line-height: 1.7; margin-bottom: 1.5rem;
     }
-    .studown-features {
+    .app-features {
       list-style: none;
       display: flex; flex-direction: column; gap: .7rem;
     }
-    .studown-features li {
+    .app-features li {
       display: flex; align-items: center; gap: .75rem;
       font-size: .92rem; color: var(--muted);
     }
     .sf-icon { font-size: 1rem; flex-shrink: 0; }
 
-    /* phone mockup for studown */
-    .studown-visual { display: flex; justify-content: center; align-items: center; position: relative; }
-    .studown-glow {
+    /* phone mockup */
+    .app-visual { display: flex; justify-content: center; align-items: center; position: relative; }
+    .app-glow {
       position: absolute; inset: -40px;
-      background: radial-gradient(ellipse at 50% 50%, rgba(124,92,252,.18) 0%, transparent 65%);
       pointer-events: none; z-index: 0;
     }
-    .studown-screenshot {
+    .app-glow.purple {
+      background: radial-gradient(ellipse at 50% 50%, rgba(124,92,252,.18) 0%, transparent 65%);
+    }
+    .app-glow.teal {
+      background: radial-gradient(ellipse at 50% 50%, rgba(20,184,166,.18) 0%, transparent 65%);
+    }
+    .app-screenshot {
       max-width: 280px;
       width: 100%;
       border-radius: 28px;
@@ -405,7 +415,8 @@
       .faq-grid     { grid-template-columns: 1fr; }
       .faq-sticky   { position: static; }
       .footer-grid  { grid-template-columns: 1fr 1fr; }
-      .studown-grid { grid-template-columns: 1fr; }
+      .app-grid     { grid-template-columns: 1fr; }
+      .app-grid.flipped .app-visual { order: 0; }
     }
     @media (max-width: 600px) {
       .nav-links    { display: none; }
@@ -449,17 +460,16 @@
   </div>
 </section>
 
-<!-- ─── LOGOS ─── -->
 <!-- ─── STUDOWN PREVIEW ─── -->
-<section class="studown-section">
+<section class="app-section alt-bg">
   <div class="container">
-    <div class="studown-grid">
-      <div class="studown-text reveal">
+    <div class="app-grid">
+      <div class="app-text reveal">
         <div class="section-label">Latest app</div>
         <h2 class="section-title">Studown</h2>
-        <p class="studown-tagline">Exam Countdown Timer</p>
-        <p class="studown-desc">Track exam dates, build study streaks, and stay motivated with a simple countdown. No ads, no tracking, no account needed. Just you and your goals.</p>
-        <ul class="studown-features">
+        <p class="app-tagline">Exam Countdown Timer</p>
+        <p class="app-desc">Track exam dates, build study streaks, and stay motivated with a simple countdown. No ads, no tracking, no account needed. Just you and your goals.</p>
+        <ul class="app-features">
           <li><span class="sf-icon">📅</span> Countdown to any exam date</li>
           <li><span class="sf-icon">🔥</span> Study streak tracking</li>
           <li><span class="sf-icon">🔔</span> Motivational daily reminders</li>
@@ -471,9 +481,38 @@
           Download on Play Store
         </a>
       </div>
-      <div class="studown-visual reveal">
-        <img src="studown-screenshot.png" alt="Studown app screenshot" class="studown-screenshot" />
-        <div class="studown-glow"></div>
+      <div class="app-visual reveal">
+        <img src="studown-screenshot.png" alt="Studown app screenshot" class="app-screenshot" />
+        <div class="app-glow purple"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── OBSIDIAN PREVIEW ─── -->
+<section class="app-section">
+  <div class="container">
+    <div class="app-grid flipped">
+      <div class="app-text reveal">
+        <div class="section-label">Also available</div>
+        <h2 class="section-title">Scoreon</h2>
+        <p class="app-tagline">The Ultimate Racket Sports Score Tracker</p>
+        <p class="app-desc">Take your game to the next level. Whether you're serving aces on the tennis court, smashing in a padel tournament, or rallying in table tennis. Scoreon makes it effortless to track every point and match. Also works on your Wear OS smartwatch.</p>
+        <ul class="app-features">
+          <li><span class="sf-icon">🎾</span> Tennis, Padel, Badminton, Squash &amp; Table Tennis</li>
+          <li><span class="sf-icon">⚡</span> Real-time score tracking with a distraction-free UI</li>
+          <li><span class="sf-icon">⌚</span> Full Wear OS companion app with seamless sync</li>
+          <li><span class="sf-icon">📊</span> Detailed match history with scores &amp; winners</li>
+          <li><span class="sf-icon">🆓</span> Free to download</li>
+        </ul>
+        <a class="btn-primary" style="margin-top:2rem;display:inline-flex" href="https://play.google.com/store/apps/details?id=com.cristimediagroup.scoreon" target="_blank">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.5c.37.2.8.2 1.17 0l14.1-8.15-3.02-3.02L3.18 23.5zm17.14-9.9L17.1 11.5l3.22-1.86c.93-.54.93-1.86 0-2.4L4.35.5C3.98.3 3.55.3 3.18.5L15.43 12.73l2.9-2.9 2.1 1.22c.92.53.92 1.85-.01 2.55z"/></svg>
+          Download on Play Store
+        </a>
+      </div>
+      <div class="app-visual reveal">
+        <img src="1Obsidian.png" alt="Scoreon app screenshot" class="app-screenshot" />
+        <div class="app-glow teal"></div>
       </div>
     </div>
   </div>
