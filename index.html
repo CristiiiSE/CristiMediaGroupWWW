@@ -88,7 +88,6 @@
       padding: 8rem 0 5rem;
       overflow: hidden;
     }
-    /* radial glow */
     .hero::after {
       content: '';
       position: absolute;
@@ -99,10 +98,75 @@
     }
     .hero-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      max-width: 680px;
+      grid-template-columns: 1fr 1fr;
       gap: 4rem;
       align-items: center;
+      width: 100%;
+    }
+
+    /* ─── 3D BOXES ─── */
+    .hero-boxes {
+      position: relative;
+      height: 480px;
+      perspective: 900px;
+    }
+    .box3d {
+      position: absolute;
+      border-radius: 18px;
+      border: 1px solid rgba(124,92,252,.35);
+      background: rgba(124,92,252,.08);
+      backdrop-filter: blur(6px);
+      transform-style: preserve-3d;
+    }
+    .box3d::before {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(135deg, rgba(192,132,252,.12) 0%, rgba(124,92,252,.04) 100%);
+    }
+    .box3d-inner {
+      position: absolute;
+      border-radius: 10px;
+      background: rgba(124,92,252,.15);
+      border: 1px solid rgba(192,132,252,.2);
+    }
+
+    .b1 { width: 200px; height: 200px; top: 60px; left: 80px; animation: float3d-1 7s ease-in-out infinite; }
+    .b2 { width: 140px; height: 140px; top: 20px; left: 260px; animation: float3d-2 9s ease-in-out infinite; border-color: rgba(192,132,252,.4); background: rgba(192,132,252,.07); }
+    .b3 { width: 170px; height: 170px; top: 240px; left: 160px; animation: float3d-3 8s ease-in-out infinite; }
+    .b4 { width: 100px; height: 100px; top: 310px; left: 50px; animation: float3d-4 6s ease-in-out infinite; border-color: rgba(192,132,252,.3); background: rgba(192,132,252,.06); }
+    .b5 { width: 80px; height: 80px; top: 160px; left: 10px; animation: float3d-5 10s ease-in-out infinite; }
+    .b6 { width: 120px; height: 120px; top: 350px; left: 310px; animation: float3d-6 7.5s ease-in-out infinite; border-color: rgba(192,132,252,.25); }
+
+    .b1 .box3d-inner { width: 60px; height: 60px; top: 24px; left: 24px; }
+    .b2 .box3d-inner { width: 44px; height: 44px; top: 18px; left: 18px; }
+    .b3 .box3d-inner { width: 50px; height: 50px; top: 20px; left: 20px; }
+
+    @keyframes float3d-1 {
+      0%,100% { transform: rotateX(12deg) rotateY(-18deg) rotateZ(3deg) translateY(0px); }
+      33%      { transform: rotateX(20deg) rotateY(-8deg)  rotateZ(-2deg) translateY(-14px); }
+      66%      { transform: rotateX(6deg)  rotateY(-25deg) rotateZ(5deg)  translateY(-6px); }
+    }
+    @keyframes float3d-2 {
+      0%,100% { transform: rotateX(-8deg) rotateY(22deg) rotateZ(-4deg) translateY(0px); }
+      50%     { transform: rotateX(15deg) rotateY(10deg) rotateZ(6deg)  translateY(-18px); }
+    }
+    @keyframes float3d-3 {
+      0%,100% { transform: rotateX(18deg) rotateY(-12deg) rotateZ(-6deg) translateY(0px); }
+      40%     { transform: rotateX(8deg)  rotateY(-22deg) rotateZ(2deg)  translateY(-10px); }
+      80%     { transform: rotateX(24deg) rotateY(-6deg)  rotateZ(-8deg) translateY(-20px); }
+    }
+    @keyframes float3d-4 {
+      0%,100% { transform: rotateX(-14deg) rotateY(16deg) rotateZ(8deg)  translateY(0px); }
+      60%     { transform: rotateX(-4deg)  rotateY(28deg) rotateZ(-4deg) translateY(-12px); }
+    }
+    @keyframes float3d-5 {
+      0%,100% { transform: rotateX(10deg) rotateY(-20deg) rotateZ(-2deg) translateY(0px); }
+      50%     { transform: rotateX(22deg) rotateY(-8deg)  rotateZ(6deg)  translateY(-16px); }
+    }
+    @keyframes float3d-6 {
+      0%,100% { transform: rotateX(-6deg) rotateY(14deg)  rotateZ(4deg)  translateY(0px); }
+      45%     { transform: rotateX(-18deg) rotateY(6deg)  rotateZ(-6deg) translateY(-8px); }
     }
     .hero-badge {
       display: inline-flex; align-items: center; gap: .5rem;
@@ -411,7 +475,7 @@
       .hero-grid    { grid-template-columns: 1fr; text-align: center; }
       .hero-sub     { max-width: 100%; }
       .hero-btns    { justify-content: center; }
-      .hero-visual  { display: none; }
+      .hero-boxes   { display: none; }
       .faq-grid     { grid-template-columns: 1fr; }
       .faq-sticky   { position: static; }
       .footer-grid  { grid-template-columns: 1fr 1fr; }
@@ -447,7 +511,7 @@
       <div class="hero-text">
         <div class="hero-badge">Solo developer · Android apps</div>
         <h1>Small team.<br><span class="grad">Solid apps.</span></h1>
-        <p class="hero-sub">I'm Cristi, an independent developer building Android apps since 2018. Clean code, regular updates, and apps people actually use.</p>
+        <p class="hero-sub">I'm Cristian, an independent developer building Android apps since 2018. Clean code, regular updates, and apps people actually use.</p>
         <div class="hero-btns">
           <a class="btn-primary" href="https://play.google.com/store/apps/dev?id=8878387422416409889" target="_blank">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.5c.37.2.8.2 1.17 0l14.1-8.15-3.02-3.02L3.18 23.5zm17.14-9.9L17.1 11.5l3.22-1.86c.93-.54.93-1.86 0-2.4L4.35.5C3.98.3 3.55.3 3.18.5L15.43 12.73l2.9-2.9 2.1 1.22c.92.53.92 1.85-.01 2.55z"/></svg>
@@ -455,6 +519,14 @@
           </a>
           <a class="btn-ghost" href="#features">See Features</a>
         </div>
+      </div>
+      <div class="hero-boxes">
+        <div class="box3d b1"><div class="box3d-inner"></div></div>
+        <div class="box3d b2"><div class="box3d-inner"></div></div>
+        <div class="box3d b3"><div class="box3d-inner"></div></div>
+        <div class="box3d b4"></div>
+        <div class="box3d b5"></div>
+        <div class="box3d b6"></div>
       </div>
     </div>
   </div>
@@ -503,7 +575,7 @@
           <li><span class="sf-icon">⚡</span> Real-time score tracking with a distraction-free UI</li>
           <li><span class="sf-icon">⌚</span> Full Wear OS companion app with seamless sync</li>
           <li><span class="sf-icon">📊</span> Detailed match history with scores &amp; winners</li>
-          <li><span class="sf-icon">🆓</span> Free to download</li>
+          <li><span class="sf-icon">💳</span> One-time purchase, no subscription</li>
         </ul>
         <a class="btn-primary" style="margin-top:2rem;display:inline-flex" href="https://play.google.com/store/apps/details?id=com.cristimediagroup.scoreon" target="_blank">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.5c.37.2.8.2 1.17 0l14.1-8.15-3.02-3.02L3.18 23.5zm17.14-9.9L17.1 11.5l3.22-1.86c.93-.54.93-1.86 0-2.4L4.35.5C3.98.3 3.55.3 3.18.5L15.43 12.73l2.9-2.9 2.1 1.22c.92.53.92 1.85-.01 2.55z"/></svg>
