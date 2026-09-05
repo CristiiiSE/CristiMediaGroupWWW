@@ -1,736 +1,731 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cristi Media Group</title>
-  <meta name="description" content="Ultimate Apps, Infinite Possibilities. Discover seamless mobile experiences crafted by Cristi Media Group." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cristi Media Group</title>
+<meta name="description" content="Independent Android apps built by Cristi Media Group. Clean code, regular updates, apps people actually use." />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --bg:        #09090f;
-      --bg2:       #111119;
-      --surface:   #16161f;
-      --border:    rgba(255,255,255,0.07);
-      --accent:    #7c5cfc;
-      --accent2:   #c084fc;
-      --text:      #f0eeff;
-      --muted:     #8b8aa0;
-      --card-bg:   rgba(255,255,255,0.03);
-    }
+  :root {
+    --bg:        #ffffff;
+    --bg-alt:    #f5f5f7;
+    --ink:       #1d1d1f;
+    --ink-soft:  #424245;
+    --muted:     #86868b;
+    --line:      #d2d2d7;
+    --accent:    #5e5ce6;
+    --accent-ink:#4a48c4;
+    --radius-lg: 22px;
+    --radius-md: 14px;
+    --radius-sm: 10px;
+  }
 
-    html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+                 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    /* ─── noise overlay ─── */
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0;
-      opacity: .025;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      pointer-events: none;
-    }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
 
-    /* ─── LAYOUT HELPERS ─── */
-    .container { max-width: 1160px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
-    section { position: relative; }
+  .container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
 
-    /* ─── NAV ─── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 1.25rem 0;
-      background: rgba(9,9,15,0.7);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      transition: background .3s;
-    }
-    .nav-inner {
-      display: flex; align-items: center; justify-content: space-between;
-      max-width: 1160px; margin: 0 auto; padding: 0 2rem;
-    }
-    .nav-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800; font-size: 1.15rem;
-      color: var(--text); text-decoration: none;
-      letter-spacing: -.02em;
-    }
-    .nav-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; }
-    .nav-links a {
-      color: var(--muted); text-decoration: none; font-size: .9rem;
-      transition: color .2s;
-    }
-    .nav-links a:hover { color: var(--text); }
-    .nav-cta {
-      background: var(--accent); color: #fff;
-      text-decoration: none; padding: .55rem 1.3rem;
-      border-radius: 8px; font-size: .875rem; font-weight: 500;
-      transition: opacity .2s, transform .15s;
-    }
-    .nav-cta:hover { opacity: .85; transform: translateY(-1px); }
+  section { position: relative; }
 
-    /* ─── HERO ─── */
-    .hero {
-      min-height: 100vh;
-      display: flex; align-items: center;
-      padding: 8rem 0 5rem;
-      overflow: hidden;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: -20%; left: 50%; transform: translateX(-50%);
-      width: 900px; height: 700px;
-      background: radial-gradient(ellipse at 50% 40%, rgba(124,92,252,.28) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      width: 100%;
-    }
+  /* Focus visibility — never remove outlines, only restyle them */
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
 
-    /* ─── 3D BOXES ─── */
-    .hero-boxes {
-      position: relative;
-      height: 480px;
-      perspective: 900px;
-    }
-    .box3d {
-      position: absolute;
-      border-radius: 18px;
-      border: 1px solid rgba(124,92,252,.35);
-      background: rgba(124,92,252,.08);
-      backdrop-filter: blur(6px);
-      transform-style: preserve-3d;
-    }
-    .box3d::before {
-      content: '';
-      position: absolute; inset: 0;
-      border-radius: inherit;
-      background: linear-gradient(135deg, rgba(192,132,252,.12) 0%, rgba(124,92,252,.04) 100%);
-    }
-    .box3d-inner {
-      position: absolute;
-      border-radius: 10px;
-      background: rgba(124,92,252,.15);
-      border: 1px solid rgba(192,132,252,.2);
-    }
+  /* ─── Reveal-on-scroll, with a safe default ───
+     Content is visible by default. JS only ADDS a temporary
+     entrance transition — it never depends on JS to be seen. */
+  .reveal { opacity: 1; transform: none; }
+  .js-reveal-ready .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity .5s ease, transform .5s ease;
+  }
+  .js-reveal-ready .reveal.visible { opacity: 1; transform: none; }
 
-    .b1 { width: 200px; height: 200px; top: 60px; left: 80px; animation: float3d-1 7s ease-in-out infinite; }
-    .b2 { width: 140px; height: 140px; top: 20px; left: 260px; animation: float3d-2 9s ease-in-out infinite; border-color: rgba(192,132,252,.4); background: rgba(192,132,252,.07); }
-    .b3 { width: 170px; height: 170px; top: 240px; left: 160px; animation: float3d-3 8s ease-in-out infinite; }
-    .b4 { width: 100px; height: 100px; top: 310px; left: 50px; animation: float3d-4 6s ease-in-out infinite; border-color: rgba(192,132,252,.3); background: rgba(192,132,252,.06); }
-    .b5 { width: 80px; height: 80px; top: 160px; left: 10px; animation: float3d-5 10s ease-in-out infinite; }
-    .b6 { width: 120px; height: 120px; top: 350px; left: 310px; animation: float3d-6 7.5s ease-in-out infinite; border-color: rgba(192,132,252,.25); }
+  @media (prefers-reduced-motion: reduce) {
+    .js-reveal-ready .reveal { opacity: 1; transform: none; transition: none; }
+    html { scroll-behavior: auto; }
+  }
 
-    .b1 .box3d-inner { width: 60px; height: 60px; top: 24px; left: 24px; }
-    .b2 .box3d-inner { width: 44px; height: 44px; top: 18px; left: 18px; }
-    .b3 .box3d-inner { width: 50px; height: 50px; top: 20px; left: 20px; }
+  /* ─── NAV ─── */
+  header.nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 52px;
+  }
+  .nav-logo {
+    font-size: 15px; font-weight: 600;
+    text-decoration: none; letter-spacing: -.01em;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .nav-logo img { width: 20px; height: 20px; border-radius: 5px; }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    font-size: 13px; color: var(--ink-soft); text-decoration: none;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    font-size: 13px; font-weight: 500;
+    color: var(--accent); text-decoration: none;
+  }
+  .nav-cta:hover { color: var(--accent-ink); }
 
-    @keyframes float3d-1 {
-      0%,100% { transform: rotateX(12deg) rotateY(-18deg) rotateZ(3deg) translateY(0px); }
-      33%      { transform: rotateX(20deg) rotateY(-8deg)  rotateZ(-2deg) translateY(-14px); }
-      66%      { transform: rotateX(6deg)  rotateY(-25deg) rotateZ(5deg)  translateY(-6px); }
-    }
-    @keyframes float3d-2 {
-      0%,100% { transform: rotateX(-8deg) rotateY(22deg) rotateZ(-4deg) translateY(0px); }
-      50%     { transform: rotateX(15deg) rotateY(10deg) rotateZ(6deg)  translateY(-18px); }
-    }
-    @keyframes float3d-3 {
-      0%,100% { transform: rotateX(18deg) rotateY(-12deg) rotateZ(-6deg) translateY(0px); }
-      40%     { transform: rotateX(8deg)  rotateY(-22deg) rotateZ(2deg)  translateY(-10px); }
-      80%     { transform: rotateX(24deg) rotateY(-6deg)  rotateZ(-8deg) translateY(-20px); }
-    }
-    @keyframes float3d-4 {
-      0%,100% { transform: rotateX(-14deg) rotateY(16deg) rotateZ(8deg)  translateY(0px); }
-      60%     { transform: rotateX(-4deg)  rotateY(28deg) rotateZ(-4deg) translateY(-12px); }
-    }
-    @keyframes float3d-5 {
-      0%,100% { transform: rotateX(10deg) rotateY(-20deg) rotateZ(-2deg) translateY(0px); }
-      50%     { transform: rotateX(22deg) rotateY(-8deg)  rotateZ(6deg)  translateY(-16px); }
-    }
-    @keyframes float3d-6 {
-      0%,100% { transform: rotateX(-6deg) rotateY(14deg)  rotateZ(4deg)  translateY(0px); }
-      45%     { transform: rotateX(-18deg) rotateY(6deg)  rotateZ(-6deg) translateY(-8px); }
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: .5rem;
-      background: rgba(124,92,252,.12);
-      border: 1px solid rgba(124,92,252,.3);
-      color: var(--accent2);
-      padding: .35rem .85rem;
-      border-radius: 999px;
-      font-size: .8rem; font-weight: 500;
-      margin-bottom: 1.5rem;
-      animation: fadeUp .6s ease both;
-    }
-    .hero-badge::before {
-      content: '';
-      width: 6px; height: 6px;
-      background: var(--accent2);
-      border-radius: 50%;
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
+  .nav-toggle {
+    display: none;
+    width: 32px; height: 32px;
+    align-items: center; justify-content: center;
+    background: none; border: none; cursor: pointer;
+    color: var(--ink);
+  }
+  .nav-toggle svg { width: 20px; height: 20px; }
 
-    h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.6rem, 5vw, 4rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -.03em;
-      margin-bottom: 1.4rem;
-      animation: fadeUp .7s .1s ease both;
-    }
-    h1 .grad {
-      background: linear-gradient(135deg, #fff 0%, var(--accent2) 60%, var(--accent) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-sub {
-      color: var(--muted); font-size: 1.05rem;
-      max-width: 460px; margin-bottom: 2.2rem;
-      animation: fadeUp .7s .2s ease both;
-    }
-    .hero-btns {
-      display: flex; gap: 1rem; flex-wrap: wrap;
-      animation: fadeUp .7s .3s ease both;
-    }
-    .btn-primary {
-      display: inline-flex; align-items: center; gap: .5rem;
-      background: var(--accent); color: #fff;
-      padding: .8rem 1.8rem; border-radius: 10px;
-      font-weight: 500; text-decoration: none; font-size: .95rem;
-      transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 0 28px rgba(124,92,252,.35);
-    }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 4px 36px rgba(124,92,252,.5); }
-    .btn-ghost {
-      display: inline-flex; align-items: center; gap: .5rem;
-      border: 1px solid var(--border); color: var(--text);
-      padding: .8rem 1.8rem; border-radius: 10px;
-      font-weight: 500; text-decoration: none; font-size: .95rem;
-      transition: border-color .2s, background .2s;
-    }
-    .btn-ghost:hover { border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.04); }
+  .nav-drawer {
+    display: none;
+    flex-direction: column;
+    border-top: 1px solid var(--line);
+    background: var(--bg);
+  }
+  .nav-drawer.open { display: flex; }
+  .nav-drawer a {
+    padding: 14px 24px;
+    font-size: 15px; text-decoration: none; color: var(--ink);
+    border-bottom: 1px solid var(--line);
+  }
 
-    /* ─── APP SECTIONS (shared styles for studown + obsidian) ─── */
-    .app-section {
-      padding: 6rem 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .app-section.alt-bg {
-      background: var(--bg2);
-    }
-    .app-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: center;
-    }
-    /* Flip layout for the second app */
-    .app-grid.flipped .app-visual { order: -1; }
+  @media (max-width: 680px) {
+    .nav-links, .nav-cta { display: none; }
+    .nav-toggle { display: flex; }
+  }
 
-    .app-tagline {
-      font-family: 'Syne', sans-serif;
-      font-size: 1rem; color: var(--accent2);
-      font-weight: 600; margin-bottom: 1.2rem;
-    }
-    .app-desc {
-      color: var(--muted); font-size: .97rem;
-      line-height: 1.7; margin-bottom: 1.5rem;
-    }
-    .app-features {
-      list-style: none;
-      display: flex; flex-direction: column; gap: .7rem;
-    }
-    .app-features li {
-      display: flex; align-items: center; gap: .75rem;
-      font-size: .92rem; color: var(--muted);
-    }
-    .sf-icon { font-size: 1rem; flex-shrink: 0; }
+  /* ─── HERO ─── */
+  .hero {
+    padding: 76px 0 0;
+    overflow: hidden;
+    position: relative;
+  }
 
-    /* phone mockup */
-    .app-visual { display: flex; justify-content: center; align-items: center; position: relative; }
-    .app-glow {
-      position: absolute; inset: -40px;
-      pointer-events: none; z-index: 0;
-    }
-    .app-glow.purple {
-      background: radial-gradient(ellipse at 50% 50%, rgba(124,92,252,.18) 0%, transparent 65%);
-    }
-    .app-glow.teal {
-      background: radial-gradient(ellipse at 50% 50%, rgba(20,184,166,.18) 0%, transparent 65%);
-    }
-    .app-screenshot {
-      max-width: 280px;
-      width: 100%;
-      border-radius: 28px;
-      box-shadow: 0 32px 64px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.07);
-      position: relative; z-index: 1;
-    }
+  /* Soft mesh-gradient backdrop — subtle, not a glow-blob */
+  .hero-mesh {
+    position: absolute;
+    top: -180px; left: 50%;
+    width: 1400px; height: 900px;
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(480px 360px at 22% 30%, rgba(94,92,230,.16), transparent 70%),
+      radial-gradient(420px 340px at 78% 15%, rgba(255,105,180,.12), transparent 70%),
+      radial-gradient(520px 400px at 55% 55%, rgba(0,199,190,.10), transparent 70%);
+    filter: blur(10px);
+  }
 
-    /* ─── FEATURES ─── */
-    .features { padding: 7rem 0; }
-    .section-label {
-      font-size: .78rem; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--accent2);
-      margin-bottom: .8rem;
-    }
-    .section-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
-      font-weight: 800; line-height: 1.2;
-      letter-spacing: -.02em;
-      margin-bottom: 1rem;
-    }
-    .section-sub { color: var(--muted); max-width: 480px; }
-    .features-header { margin-bottom: 4rem; }
+  .hero-inner {
+    position: relative; z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 40px;
+  }
 
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-    }
-    .feature-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 2rem 1.8rem;
-      transition: transform .25s, border-color .25s, background .25s;
-    }
-    .feature-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(124,92,252,.3);
-      background: rgba(124,92,252,.05);
-    }
-    .feature-icon {
-      width: 48px; height: 48px;
-      border-radius: 14px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 1.2rem;
-    }
-    .feature-card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1rem; font-weight: 700;
-      margin-bottom: .6rem;
-    }
-    .feature-card p { color: var(--muted); font-size: .9rem; line-height: 1.65; }
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 640px;
+  }
 
-    /* ─── STATS ─── */
-    .stats-section {
-      padding: 5rem 0;
-      background: var(--bg2);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 2rem; text-align: center;
-    }
-    .stat-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 3rem; font-weight: 800;
-      letter-spacing: -.04em;
-      background: linear-gradient(135deg, #fff, var(--accent2));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-    }
-    .stat-label { color: var(--muted); font-size: .85rem; margin-top: .3rem; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 13px; font-weight: 500;
+    color: var(--ink-soft);
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    padding: 6px 14px 6px 10px;
+    border-radius: 980px;
+    margin-bottom: 24px;
+  }
+  .hero-badge .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
 
-    /* ─── FAQ ─── */
-    .faq-section { padding: 7rem 0; }
-    .faq-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: start; }
-    .faq-sticky { position: sticky; top: 7rem; }
-    .faq-list { display: flex; flex-direction: column; gap: .75rem; }
-    .faq-item {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-    }
-    .faq-q {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 1.2rem 1.5rem;
-      cursor: pointer; user-select: none;
-      font-weight: 500; font-size: .95rem;
-      transition: background .2s;
-    }
-    .faq-q:hover { background: rgba(255,255,255,.03); }
-    .faq-chevron {
-      width: 20px; height: 20px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--muted);
-      transition: transform .3s;
-    }
-    .faq-item.open .faq-chevron { transform: rotate(180deg); }
-    .faq-a {
-      max-height: 0; overflow: hidden;
-      transition: max-height .35s ease, padding .35s ease;
-      padding: 0 1.5rem;
-      color: var(--muted); font-size: .9rem;
-    }
-    .faq-item.open .faq-a { max-height: 200px; padding: 0 1.5rem 1.2rem; }
+  h1 {
+    font-size: clamp(2.6rem, 5.4vw, 4rem);
+    font-weight: 700;
+    letter-spacing: -.025em;
+    line-height: 1.04;
+    margin-bottom: 22px;
+  }
+  h1 .accent-line {
+    display: block;
+    background: linear-gradient(100deg, var(--accent) 10%, #ff5cad 60%, #ff9166 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-    /* ─── CTA ─── */
-    .cta-section {
-      padding: 6rem 0;
-    }
-    .cta-box {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      padding: 5rem 3rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-    .cta-box::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 50% 0%, rgba(124,92,252,.2) 0%, transparent 65%);
-      pointer-events: none;
-    }
-    .cta-box h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800; letter-spacing: -.03em;
-      margin-bottom: 1rem;
-    }
-    .cta-box p { color: var(--muted); max-width: 420px; margin: 0 auto 2.5rem; }
-    .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--ink-soft);
+    max-width: 460px;
+    margin-bottom: 32px;
+  }
+  .hero-btns {
+    display: flex; gap: 16px; flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #fff;
+    padding: 12px 24px; border-radius: 980px;
+    font-weight: 500; font-size: 15px; text-decoration: none;
+    transition: background .15s, transform .15s;
+  }
+  .btn-primary:hover { background: var(--accent-ink); transform: translateY(-1px); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 6px;
+    color: var(--accent); text-decoration: none;
+    padding: 12px 4px;
+    font-weight: 400; font-size: 15px;
+  }
+  .btn-secondary:hover { color: var(--accent-ink); }
+  .btn-secondary svg { width: 14px; height: 14px; }
 
-    /* ─── FOOTER ─── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 4rem 0 2.5rem;
-    }
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-    .footer-brand { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem; margin-bottom: .8rem; }
-    .footer-brand span { color: var(--accent); }
-    .footer-desc { color: var(--muted); font-size: .88rem; line-height: 1.7; margin-bottom: 1.2rem; }
-    .footer-socials { display: flex; gap: .75rem; }
-    .social-btn {
-      width: 36px; height: 36px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--muted); text-decoration: none; font-size: 1rem;
-      transition: border-color .2s, color .2s;
-    }
-    .social-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .footer-col h4 {
-      font-family: 'Syne', sans-serif;
-      font-size: .8rem; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase;
-      color: var(--muted); margin-bottom: 1rem;
-    }
-    .footer-links { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
-    .footer-links a { color: var(--muted); text-decoration: none; font-size: .88rem; transition: color .2s; }
-    .footer-links a:hover { color: var(--text); }
-    .footer-bottom {
-      border-top: 1px solid var(--border);
-      padding-top: 1.5rem;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 1rem;
-    }
-    .footer-bottom p { color: var(--muted); font-size: .82rem; }
+  .hero-proof {
+    display: flex; align-items: center; justify-content: center; gap: 20px;
+    color: var(--muted); font-size: 13px;
+  }
+  .hero-proof strong { color: var(--ink); font-weight: 600; }
+  .hero-proof .sep { width: 1px; height: 14px; background: var(--line); }
 
-    /* ─── ANIMATIONS ─── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(22px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    .reveal {
-      opacity: 0; transform: translateY(28px);
-      transition: opacity .65s ease, transform .65s ease;
-    }
-    .reveal.visible { opacity: 1; transform: none; }
+  /* ─── Hero device stack: two angled phones ─── */
+  .hero-devices {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    height: 480px;
+    margin: 48px auto 0;
+  }
+  .hero-devices .device {
+    position: absolute;
+    width: 230px;
+    border-radius: 34px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px -12px rgba(0,0,0,.28), 0 0 0 1px rgba(0,0,0,.06);
+    background: var(--bg-alt);
+  }
+  .hero-devices .device img { width: 100%; display: block; }
+  .device-back {
+    top: 0; right: 20px;
+    transform: rotate(9deg);
+    opacity: .92;
+    z-index: 1;
+  }
+  .device-front {
+    bottom: 0; left: 20px;
+    width: 250px;
+    transform: rotate(-6deg);
+    z-index: 2;
+  }
 
-    /* ─── RESPONSIVE ─── */
-    @media (max-width: 900px) {
-      .hero-grid    { grid-template-columns: 1fr; text-align: center; }
-      .hero-sub     { max-width: 100%; }
-      .hero-btns    { justify-content: center; }
-      .hero-boxes   { display: none; }
-      .faq-grid     { grid-template-columns: 1fr; }
-      .faq-sticky   { position: static; }
-      .footer-grid  { grid-template-columns: 1fr 1fr; }
-      .app-grid     { grid-template-columns: 1fr; }
-      .app-grid.flipped .app-visual { order: 0; }
+  @media (max-width: 900px) {
+    .hero-devices { height: 420px; max-width: 380px; }
+  }
+  @media (max-width: 600px) {
+    .hero { padding-top: 48px; }
+    .hero-proof {
+      flex-wrap: wrap;
+      row-gap: 6px;
+      margin-bottom: 8px;
     }
-    @media (max-width: 600px) {
-      .nav-links    { display: none; }
-      .footer-grid  { grid-template-columns: 1fr; }
-    }
-  </style>
+    .hero-devices { height: 280px; margin-top: 64px; }
+    .hero-devices .device { width: 150px; }
+    .hero-devices .device-front { width: 162px; }
+  }
+
+  /* ─── APP SECTIONS ─── */
+  .app-section {
+    padding: 96px 0;
+    border-top: 1px solid var(--line);
+  }
+  .app-section.alt-bg { background: var(--bg-alt); }
+  .app-grid {
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .app-grid.flipped .app-visual { order: -1; }
+
+  .eyebrow {
+    font-size: 13px; font-weight: 600; color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .app-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 600; letter-spacing: -.02em;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .app-tagline {
+    font-size: 17px; color: var(--ink-soft); margin-bottom: 20px;
+  }
+  .app-desc {
+    color: var(--ink-soft); font-size: 16px;
+    line-height: 1.6; margin-bottom: 24px;
+    max-width: 46ch;
+  }
+  .app-features {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 12px;
+    margin-bottom: 28px;
+  }
+  .app-features li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-size: 15px; color: var(--ink);
+  }
+  .app-features svg {
+    width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px;
+    color: var(--accent);
+  }
+
+  .app-visual { display: flex; justify-content: center; }
+  .app-screenshot {
+    max-width: 260px; width: 100%;
+    border-radius: 28px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.12);
+  }
+
+  /* ─── FEATURES ─── */
+  .features { padding: 100px 0; }
+  .section-head { max-width: 620px; margin-bottom: 56px; }
+  .section-head.center { margin-left: auto; margin-right: auto; text-align: center; }
+  .section-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 600; letter-spacing: -.02em; line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .section-sub { color: var(--ink-soft); font-size: 17px; }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+  .feature-card {
+    background: var(--bg);
+    padding: 32px 28px;
+  }
+  .feature-icon {
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .feature-icon svg { width: 26px; height: 26px; }
+  .feature-card h3 {
+    font-size: 17px; font-weight: 600; margin-bottom: 8px;
+  }
+  .feature-card p { color: var(--ink-soft); font-size: 15px; line-height: 1.55; }
+  .feature-card a { color: var(--accent); text-decoration: none; }
+  .feature-card a:hover { text-decoration: underline; }
+
+  /* ─── STATS ─── */
+  .stats-section {
+    padding: 72px 0;
+    background: var(--bg-alt);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 32px; text-align: center;
+  }
+  .stat-num {
+    font-size: 2.4rem; font-weight: 600; letter-spacing: -.02em;
+    color: var(--ink);
+  }
+  .stat-label { color: var(--muted); font-size: 14px; margin-top: 4px; }
+
+  /* ─── FAQ ─── */
+  .faq-section { padding: 100px 0; }
+  .faq-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; align-items: start; }
+  .faq-list { display: flex; flex-direction: column; }
+  .faq-item { border-bottom: 1px solid var(--line); }
+  .faq-item:first-child { border-top: 1px solid var(--line); }
+  .faq-q {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px;
+    padding: 20px 4px;
+    cursor: pointer; user-select: none;
+    background: none; border: none; width: 100%; text-align: left;
+    font-family: inherit; font-weight: 500; font-size: 16px; color: var(--ink);
+  }
+  .faq-chevron {
+    width: 18px; height: 18px; flex-shrink: 0;
+    color: var(--muted);
+    transition: transform .25s;
+  }
+  .faq-item[data-open="true"] .faq-chevron { transform: rotate(45deg); }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height .3s ease;
+    color: var(--ink-soft); font-size: 15px; line-height: 1.6;
+  }
+  .faq-item[data-open="true"] .faq-a { max-height: 240px; }
+  .faq-a-inner { padding: 0 4px 20px; max-width: 60ch; }
+
+  /* ─── CTA ─── */
+  .cta-section { padding: 96px 0; }
+  .cta-box {
+    background: var(--ink);
+    color: #fff;
+    border-radius: var(--radius-lg);
+    padding: 72px 32px;
+    text-align: center;
+  }
+  .cta-box h2 {
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    font-weight: 600; letter-spacing: -.02em;
+    margin-bottom: 12px;
+  }
+  .cta-box p { color: #a1a1a6; max-width: 420px; margin: 0 auto 32px; }
+  .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .cta-box .btn-primary { background: #fff; color: var(--ink); }
+  .cta-box .btn-primary:hover { background: #e8e8ed; }
+  .cta-box .btn-secondary { color: #fff; }
+  .cta-box .btn-secondary:hover { color: #d1d1d6; }
+
+  /* ─── FOOTER ─── */
+  footer { border-top: 1px solid var(--line); padding: 56px 0 32px; }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+  }
+  .footer-brand { font-weight: 600; font-size: 15px; margin-bottom: 10px; }
+  .footer-desc { color: var(--muted); font-size: 13px; line-height: 1.6; margin-bottom: 16px; }
+  .footer-socials { display: flex; gap: 10px; }
+  .social-btn {
+    width: 32px; height: 32px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--ink-soft); text-decoration: none;
+  }
+  .social-btn:hover { border-color: var(--muted); color: var(--ink); }
+  .footer-col h4 {
+    font-size: 12px; font-weight: 600;
+    letter-spacing: .02em;
+    color: var(--muted); margin-bottom: 12px;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .footer-links a { color: var(--ink-soft); text-decoration: none; font-size: 13px; }
+  .footer-links a:hover { color: var(--ink); }
+  .footer-bottom {
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .footer-bottom p { color: var(--muted); font-size: 12px; }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    .app-grid { grid-template-columns: 1fr; gap: 40px; }
+    .app-grid.flipped .app-visual { order: 0; }
+    .faq-grid { grid-template-columns: 1fr; gap: 24px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .hero { padding: 64px 0 56px; }
+    .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+</style>
 </head>
 <body>
 
-<!-- ─── NAV ─── -->
-<nav>
-  <div class="nav-inner">
-    <a class="nav-logo" href="#">Cristi<span>Media</span></a>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="nav-logo" href="#top">
+      <img src="Logo.png" alt="" />
+      CristiMedia
+    </a>
     <ul class="nav-links">
       <li><a href="#features">Features</a></li>
       <li><a href="#faq">FAQ</a></li>
       <li><a href="https://cristimediagroup.com/news">News</a></li>
       <li><a href="changelogs.html">Changelog</a></li>
     </ul>
-    <a class="nav-cta" href="https://play.google.com/store/apps/dev?id=8878387422416409889" target="_blank">Visit Store →</a>
+    <a class="nav-cta" href="https://play.google.com/store/apps/dev?id=8878387422416409889" target="_blank">Visit Store</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
   </div>
-</nav>
+  <nav class="nav-drawer" id="navDrawer">
+    <a href="#features">Features</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://cristimediagroup.com/news">News</a>
+    <a href="changelogs.html">Changelog</a>
+    <a href="https://play.google.com/store/apps/dev?id=8878387422416409889" target="_blank">Visit Store</a>
+  </nav>
+</header>
 
-<!-- ─── HERO ─── -->
-<section class="hero">
-  <div class="container">
-    <div class="hero-grid">
-      <div class="hero-text">
-        <div class="hero-badge">Solo developer · Android apps</div>
-        <h1>Small team.<br><span class="grad">Solid apps.</span></h1>
-        <p class="hero-sub">I'm Cristian, an independent developer building Android apps since 2018. Clean code, regular updates, and apps people actually use.</p>
+<main id="top">
+
+  <!-- ─── HERO ─── -->
+  <section class="hero">
+    <div class="hero-mesh" aria-hidden="true"></div>
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <p class="hero-badge"><span class="dot"></span> Solo developer, Android apps since 2018</p>
+        <h1>Small team.<span class="accent-line">Solid apps.</span></h1>
+        <p class="hero-sub">I'm Cristian, an independent developer building Android apps that people actually keep using. Clean code and regular updates, without the overhead of a big team.</p>
         <div class="hero-btns">
-          <a class="btn-primary" href="https://play.google.com/store/apps/dev?id=8878387422416409889" target="_blank">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.5c.37.2.8.2 1.17 0l14.1-8.15-3.02-3.02L3.18 23.5zm17.14-9.9L17.1 11.5l3.22-1.86c.93-.54.93-1.86 0-2.4L4.35.5C3.98.3 3.55.3 3.18.5L15.43 12.73l2.9-2.9 2.1 1.22c.92.53.92 1.85-.01 2.55z"/></svg>
-            Visit Play Store
-          </a>
-          <a class="btn-ghost" href="#features">See Features</a>
+          <a class="btn-primary" href="https://play.google.com/store/apps/dev?id=8878387422416409889" target="_blank">Visit Play Store</a>
+          <a class="btn-secondary" href="#features">See what I focus on <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="hero-proof">
+          <span><strong>10K+</strong> downloads</span>
+          <span class="sep"></span>
+          <span><strong>2</strong> apps live</span>
+          <span class="sep"></span>
+          <span>Building since <strong>2018</strong></span>
         </div>
       </div>
-      <div class="hero-boxes">
-        <div class="box3d b1"><div class="box3d-inner"></div></div>
-        <div class="box3d b2"><div class="box3d-inner"></div></div>
-        <div class="box3d b3"><div class="box3d-inner"></div></div>
-        <div class="box3d b4"></div>
-        <div class="box3d b5"></div>
-        <div class="box3d b6"></div>
+      <div class="hero-devices" role="img" aria-label="Studown and Scoreon apps shown on Android phones">
+        <div class="device device-back"><img src="1Obsidian.png" alt="" /></div>
+        <div class="device device-front"><img src="2Obsidian.png" alt="" /></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ─── STUDOWN PREVIEW ─── -->
-<section class="app-section alt-bg">
-  <div class="container">
-    <div class="app-grid">
-      <div class="app-text reveal">
-        <div class="section-label">Latest app</div>
-        <h2 class="section-title">Studown</h2>
-        <p class="app-tagline">Exam Countdown Timer</p>
-        <p class="app-desc">Track exam dates, build study streaks, and stay motivated with a simple countdown. No ads, no tracking, no account needed. Just you and your goals.</p>
-        <ul class="app-features">
-          <li><span class="sf-icon">📅</span> Countdown to any exam date</li>
-          <li><span class="sf-icon">🔥</span> Study streak tracking</li>
-          <li><span class="sf-icon">🔔</span> Motivational daily reminders</li>
-          <li><span class="sf-icon">🔒</span> 100% offline &amp; privacy-first</li>
-          <li><span class="sf-icon">🆓</span> Completely free, no ads</li>
-        </ul>
-        <a class="btn-primary" style="margin-top:2rem;display:inline-flex" href="https://play.google.com/store/apps/details?id=com.cristimediagroup.studown" target="_blank">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.5c.37.2.8.2 1.17 0l14.1-8.15-3.02-3.02L3.18 23.5zm17.14-9.9L17.1 11.5l3.22-1.86c.93-.54.93-1.86 0-2.4L4.35.5C3.98.3 3.55.3 3.18.5L15.43 12.73l2.9-2.9 2.1 1.22c.92.53.92 1.85-.01 2.55z"/></svg>
-          Download on Play Store
-        </a>
-      </div>
-      <div class="app-visual reveal">
-        <img src="2Obsidian.png" alt="Studown app screenshot" class="app-screenshot" />
-        <div class="app-glow purple"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── OBSIDIAN PREVIEW ─── -->
-<section class="app-section">
-  <div class="container">
-    <div class="app-grid flipped">
-      <div class="app-text reveal">
-        <div class="section-label">Also available</div>
-        <h2 class="section-title">Scoreon</h2>
-        <p class="app-tagline">The Ultimate Racket Sports Score Tracker</p>
-        <p class="app-desc">Take your game to the next level. Whether you're serving aces on the tennis court, smashing in a padel tournament, or rallying in table tennis. Scoreon makes it effortless to track every point and match. Also works on your Wear OS smartwatch.</p>
-        <ul class="app-features">
-          <li><span class="sf-icon">🎾</span> Tennis, Padel, Badminton, Squash &amp; Table Tennis</li>
-          <li><span class="sf-icon">⚡</span> Real-time score tracking with a distraction-free UI</li>
-          <li><span class="sf-icon">⌚</span> Full Wear OS companion app with seamless sync</li>
-          <li><span class="sf-icon">📊</span> Detailed match history with scores &amp; winners</li>
-          <li><span class="sf-icon">💳</span> One-time purchase, no subscription</li>
-        </ul>
-        <a class="btn-primary" style="margin-top:2rem;display:inline-flex" href="https://play.google.com/store/apps/details?id=com.cristimediagroup.scoreon" target="_blank">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.5c.37.2.8.2 1.17 0l14.1-8.15-3.02-3.02L3.18 23.5zm17.14-9.9L17.1 11.5l3.22-1.86c.93-.54.93-1.86 0-2.4L4.35.5C3.98.3 3.55.3 3.18.5L15.43 12.73l2.9-2.9 2.1 1.22c.92.53.92 1.85-.01 2.55z"/></svg>
-          Download on Play Store
-        </a>
-      </div>
-      <div class="app-visual reveal">
-        <img src="1Obsidian.png" alt="Scoreon app screenshot" class="app-screenshot" />
-        <div class="app-glow teal"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── FEATURES ─── -->
-<section id="features" class="features">
-  <div class="container">
-    <div class="features-header reveal">
-      <div class="section-label">What I focus on</div>
-      <h2 class="section-title">How I build<br>every app.</h2>
-      <p class="section-sub">No team of hundreds, just consistent principles I apply to every project I ship.</p>
-    </div>
-    <div class="features-grid">
-      <div class="feature-card reveal">
-        <div class="feature-icon" style="background: rgba(124,92,252,.15);">✨</div>
-        <h3>Quality First</h3>
-        <p>App quality is always our top priority. We obsess over perfectly crafted interfaces that make customers smile.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon" style="background: rgba(34,197,94,.1);">🛡️</div>
-        <h3>Security Updates</h3>
-        <p>We actively support Android versions still receiving security patches, keeping your data safe at all times.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon" style="background: rgba(192,132,252,.1);">🚀</div>
-        <h3>Releases & News</h3>
-        <p>Follow <a href="https://www.instagram.com/acristian007/" target="_blank" style="color:var(--accent2);text-decoration:none;">@acristian007</a> on Instagram to stay in the loop with the latest updates and new releases.</p>
-      </div>
-      <div class="feature-card reveal">
-        <div class="feature-icon" style="background: rgba(251,191,36,.1);">💬</div>
-        <h3>Open Source Review</h3>
-        <p>Want to audit our code before launch? Feel free to reach out via email. Transparency is part of who we are.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── STATS ─── -->
-<section class="stats-section">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="reveal">
-        <div class="stat-num">10K+</div>
-        <div class="stat-label">Total downloads</div>
-      </div>
-      <div class="reveal">
-        <div class="stat-num">2018</div>
-        <div class="stat-label">Building since</div>
-      </div>
-      <div class="reveal">
-        <div class="stat-num">Solo</div>
-        <div class="stat-label">Independent developer</div>
-      </div>
-      <div class="reveal">
-        <div class="stat-num">Free</div>
-        <div class="stat-label">Most apps are free</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── FAQ ─── -->
-<section id="faq" class="faq-section">
-  <div class="container">
-    <div class="faq-grid">
-      <div class="faq-sticky reveal">
-        <div class="section-label">Support</div>
-        <h2 class="section-title">Frequently asked questions</h2>
-        <p class="section-sub" style="margin-top:.8rem">Can't find what you're looking for? Reach out to us directly.</p>
-        <div style="margin-top:2rem">
-          <a class="btn-ghost" href="mailto:cristian@cristimediagroup.com" style="display:inline-flex">Contact us →</a>
+  <!-- ─── STUDOWN ─── -->
+  <section class="app-section alt-bg">
+    <div class="container">
+      <div class="app-grid">
+        <div class="app-text reveal">
+          <p class="eyebrow">Latest app</p>
+          <h2 class="app-title">Studown</h2>
+          <p class="app-tagline">Exam countdown timer</p>
+          <p class="app-desc">Track exam dates, build study streaks, and stay motivated with a simple countdown. No ads, no tracking, no account needed — just you and your goals.</p>
+          <ul class="app-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Countdown to any exam date</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Study streak tracking</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Motivational daily reminders</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> 100% offline and private</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Completely free, no ads</li>
+          </ul>
+          <a class="btn-primary" href="https://play.google.com/store/apps/details?id=com.cristimediagroup.studown" target="_blank">Download on Play Store</a>
+        </div>
+        <div class="app-visual reveal">
+          <img src="2Obsidian.png" alt="Studown app screenshot" class="app-screenshot" />
         </div>
       </div>
-      <div class="faq-list reveal">
-        <div class="faq-item open">
-          <div class="faq-q" onclick="toggleFaq(this)">
-            Are the apps collecting personal information?
-            <span class="faq-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+    </div>
+  </section>
+
+  <!-- ─── SCOREON ─── -->
+  <section class="app-section">
+    <div class="container">
+      <div class="app-grid flipped">
+        <div class="app-text reveal">
+          <p class="eyebrow">Also available</p>
+          <h2 class="app-title">Scoreon</h2>
+          <p class="app-tagline">The racket sports score tracker</p>
+          <p class="app-desc">Track every point across tennis, padel, badminton, squash, and table tennis, with a distraction-free scoring UI and a Wear OS companion that syncs in real time.</p>
+          <ul class="app-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Tennis, padel, badminton, squash &amp; table tennis</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Real-time score tracking, distraction-free</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Full Wear OS companion app with seamless sync</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Detailed match history with scores &amp; winners</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> One-time purchase, no subscription</li>
+          </ul>
+          <a class="btn-primary" href="https://play.google.com/store/apps/details?id=com.cristimediagroup.scoreon" target="_blank">Download on Play Store</a>
+        </div>
+        <div class="app-visual reveal">
+          <img src="1Obsidian.png" alt="Scoreon app screenshot" class="app-screenshot" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── FEATURES ─── -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="section-head reveal">
+        <h2 class="section-title">How I build every app</h2>
+        <p class="section-sub">No team of hundreds — just a few principles I hold to on every project I ship.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.5l-6.3 4.5 2.3-7.2-6-4.6h7.6z"/></svg>
           </div>
-          <div class="faq-a">Our apps leverage modern security technologies including encryption to protect your data. We are transparent about what is collected. Full details are available in our Privacy Policy.</div>
+          <h3>Quality first</h3>
+          <p>App quality is always the top priority — crafted interfaces that make people smile, not just apps that ship.</p>
         </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">
-            Are your services safe for storing personal information?
-            <span class="faq-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 3v6c0 5-3.4 8.7-8 11-4.6-2.3-8-6-8-11V5l8-3z"/></svg>
           </div>
-          <div class="faq-a">Yes. We employ state-of-the-art encryption and tokenization techniques to ensure the safety of your information across all our apps and services.</div>
+          <h3>Security updates</h3>
+          <p>Active support for Android versions still receiving security patches, keeping your data safe at all times.</p>
         </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">
-            How do I get started with your apps?
-            <span class="faq-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/><path d="M13 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" opacity="0"/><circle cx="12" cy="12" r="9"/></svg>
           </div>
-          <div class="faq-a">Simply visit our Play Store page, download the app that suits your needs, create an account, and you're ready to go. Setup takes less than a minute.</div>
+          <h3>Releases &amp; news</h3>
+          <p>Follow <a href="https://www.instagram.com/acristian007/" target="_blank">@acristian007</a> on Instagram for the latest updates and new releases.</p>
         </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">
-            Are there any fees for using your apps?
-            <span class="faq-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
+        <div class="feature-card reveal">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 01-8.9 8.4 8.6 8.6 0 01-3.8-1L3 20l1.2-5.3a8.4 8.4 0 01-1-3.9A8.4 8.4 0 0111.6 2a8.4 8.4 0 019.4 9.5z"/></svg>
           </div>
-          <div class="faq-a">Core features are free. Some advanced functionality may require a one-time purchase or subscription. Pricing details are clearly listed on each app's Play Store page.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">
-            Can I review the code before using an app?
-            <span class="faq-chevron"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></span>
-          </div>
-          <div class="faq-a">Absolutely. Contact us via email and we'll arrange a code review. We believe in transparency and welcome security-minded developers to take a look.</div>
+          <h3>Open source review</h3>
+          <p>Want to audit the code before launch? Reach out by email — transparency is part of who I am.</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ─── CTA ─── -->
-<section class="cta-section">
-  <div class="container">
-    <div class="cta-box reveal">
-      <div class="section-label">Get started</div>
-      <h2>Check out my apps.</h2>
-      <p>All available on the Google Play Store. Most are free to download.</p>
-      <div class="cta-btns">
-        <a class="btn-primary" href="https://play.google.com/store/apps/dev?id=8878387422416409889" target="_blank">Visit Play Store →</a>
-        <a class="btn-ghost" href="https://cristimediagroup.com/news" target="_blank">Read the News</a>
+  <!-- ─── STATS ─── -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="reveal">
+          <div class="stat-num">10K+</div>
+          <div class="stat-label">Total downloads</div>
+        </div>
+        <div class="reveal">
+          <div class="stat-num">2018</div>
+          <div class="stat-label">Building since</div>
+        </div>
+        <div class="reveal">
+          <div class="stat-num">Solo</div>
+          <div class="stat-label">Independent developer</div>
+        </div>
+        <div class="reveal">
+          <div class="stat-num">Free</div>
+          <div class="stat-label">Most apps are free</div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- ─── FAQ ─── -->
+  <section id="faq" class="faq-section">
+    <div class="container">
+      <div class="faq-grid">
+        <div class="reveal">
+          <p class="eyebrow">Support</p>
+          <h2 class="section-title">Frequently asked questions</h2>
+          <p class="section-sub" style="margin-bottom:24px">Can't find what you're looking for? Reach out directly.</p>
+          <a class="btn-secondary" href="mailto:cristian@cristimediagroup.com">Contact us <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="faq-list reveal">
+          <div class="faq-item" data-open="true">
+            <button class="faq-q" aria-expanded="true">
+              Do the apps collect personal information?
+              <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <div class="faq-a"><p class="faq-a-inner">Studown and Scoreon don't require an account and store data on-device by default. Where any data is collected, it's covered in full in the Privacy Policy for that app.</p></div>
+          </div>
+          <div class="faq-item" data-open="false">
+            <button class="faq-q" aria-expanded="false">
+              How do I get started?
+              <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <div class="faq-a"><p class="faq-a-inner">Visit the Play Store page and download the app you want. No account or sign-up needed — most apps are ready to use in under a minute.</p></div>
+          </div>
+          <div class="faq-item" data-open="false">
+            <button class="faq-q" aria-expanded="false">
+              Are there any fees?
+              <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <div class="faq-a"><p class="faq-a-inner">Core features are free. Some apps offer an optional one-time purchase for advanced features — pricing is always listed on the app's Play Store page.</p></div>
+          </div>
+          <div class="faq-item" data-open="false">
+            <button class="faq-q" aria-expanded="false">
+              Can I review the code before using an app?
+              <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
+            </button>
+            <div class="faq-a"><p class="faq-a-inner">Yes. Get in touch by email and a code review can be arranged — security-minded developers are always welcome to take a look.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CTA ─── -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box reveal">
+        <h2>Check out my apps</h2>
+        <p>All available on the Google Play Store. Most are free to download.</p>
+        <div class="cta-btns">
+          <a class="btn-primary" href="https://play.google.com/store/apps/dev?id=8878387422416409889" target="_blank">Visit Play Store</a>
+          <a class="btn-secondary" href="https://cristimediagroup.com/news" target="_blank">Read the news <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <!-- ─── FOOTER ─── -->
 <footer>
   <div class="container">
     <div class="footer-grid">
       <div>
-        <div class="footer-brand">Cristi<span>Media</span> Group</div>
-        <p class="footer-desc">Solo Android developer based in Belgium. Building apps since 2018.<br>+32 470/11.85.39</p>
+        <div class="footer-brand">CristiMedia Group</div>
+        <p class="footer-desc">Solo Android developer based in Belgium.<br>Building apps since 2018.<br>+32 470 11 85 39</p>
         <div class="footer-socials">
-          <a class="social-btn" href="https://www.instagram.com/acristian007/" target="_blank" title="Instagram">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          <a class="social-btn" href="https://www.instagram.com/acristian007/" target="_blank" aria-label="Instagram">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
           </a>
-          <a class="social-btn" href="https://twitter.com/aristocristi" target="_blank" title="Twitter / X">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          <a class="social-btn" href="https://twitter.com/aristocristi" target="_blank" aria-label="Twitter / X">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
           </a>
-          <a class="social-btn" href="https://www.facebook.com/cristian.stefan.161/" target="_blank" title="Facebook">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <a class="social-btn" href="https://www.facebook.com/cristian.stefan.161/" target="_blank" aria-label="Facebook">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
           </a>
         </div>
       </div>
@@ -747,42 +742,73 @@
         <h4>Legal</h4>
         <ul class="footer-links">
           <li><a href="Safety.html">Safety</a></li>
-          <li><a href="Form.html">Contact Form</a></li>
+          <li><a href="Form.html">Contact form</a></li>
           <li><a href="https://play.google.com/store/apps/dev?id=8878387422416409889" target="_blank">Play Store</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Cristi Media Group and Cristi Media Studios. All rights reserved.</p>
+      <p>&copy; 2026 Cristi Media Group and Cristi Media Studios. All rights reserved.</p>
       <p>Belgium</p>
     </div>
   </div>
 </footer>
 
 <script>
-  // ── FAQ toggle ──
-  function toggleFaq(trigger) {
-    const item = trigger.closest('.faq-item');
-    const isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(el => el.classList.remove('open'));
-    if (!isOpen) item.classList.add('open');
-  }
-
-  // ── Scroll reveal ──
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
-    });
-  }, { threshold: 0.12 });
-  reveals.forEach(el => observer.observe(el));
-
-  // ── Stagger child reveals ──
-  document.querySelectorAll('.features-grid, .stats-grid').forEach(grid => {
-    grid.querySelectorAll('.reveal').forEach((card, i) => {
-      card.style.transitionDelay = `${i * 0.1}s`;
+  // Mobile nav drawer
+  const navToggle = document.getElementById('navToggle');
+  const navDrawer = document.getElementById('navDrawer');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navDrawer.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+  navDrawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navDrawer.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
     });
   });
+
+  // FAQ accordion (single-open), keyboard- and screen-reader-friendly
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.getAttribute('data-open') === 'true';
+      document.querySelectorAll('.faq-item').forEach(el => {
+        el.setAttribute('data-open', 'false');
+        el.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.setAttribute('data-open', 'true');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // Scroll reveal — progressive enhancement only.
+  // Content is visible by default (see CSS); this just adds a
+  // brief entrance transition where IntersectionObserver exists,
+  // and never leaves anything permanently hidden.
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('js-reveal-ready');
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => observer.observe(el));
+
+    // Safety net: if anything is still unrevealed after 2s
+    // (observer never fired, tab was backgrounded, etc.),
+    // reveal it anyway rather than leave it hidden.
+    setTimeout(() => {
+      document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
+    }, 2000);
+  }
 </script>
 </body>
 </html>
