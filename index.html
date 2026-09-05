@@ -45,7 +45,7 @@
 
   section { position: relative; }
 
-  /* Focus visibility — never remove outlines, only restyle them */
+  /* Focus visibility, never remove outlines, only restyle them */
   a:focus-visible, button:focus-visible {
     outline: 2px solid var(--accent);
     outline-offset: 3px;
@@ -54,7 +54,7 @@
 
   /* ─── Reveal-on-scroll, with a safe default ───
      Content is visible by default. JS only ADDS a temporary
-     entrance transition — it never depends on JS to be seen. */
+     entrance transition, it never depends on JS to be seen. */
   .reveal { opacity: 1; transform: none; }
   .js-reveal-ready .reveal {
     opacity: 0;
@@ -131,7 +131,7 @@
     position: relative;
   }
 
-  /* Soft mesh-gradient backdrop — subtle, not a glow-blob */
+  /* Soft mesh-gradient backdrop, subtle, not a glow-blob */
   .hero-mesh {
     position: absolute;
     top: -180px; left: 50%;
@@ -544,7 +544,7 @@
           <p class="eyebrow">Latest app</p>
           <h2 class="app-title">Studown</h2>
           <p class="app-tagline">Exam countdown timer</p>
-          <p class="app-desc">Track exam dates, build study streaks, and stay motivated with a simple countdown. No ads, no tracking, no account needed — just you and your goals.</p>
+          <p class="app-desc">Track exam dates, build study streaks, and stay motivated with a simple countdown. No ads, no tracking, no account needed. Just you and your goals.</p>
           <ul class="app-features">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Countdown to any exam date</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Study streak tracking</li>
@@ -591,7 +591,7 @@
     <div class="container">
       <div class="section-head reveal">
         <h2 class="section-title">How I build every app</h2>
-        <p class="section-sub">No team of hundreds — just a few principles I hold to on every project I ship.</p>
+        <p class="section-sub">No team of hundreds, just a few principles I hold to on every project I ship.</p>
       </div>
       <div class="features-grid">
         <div class="feature-card reveal">
@@ -599,7 +599,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2L12 16.5l-6.3 4.5 2.3-7.2-6-4.6h7.6z"/></svg>
           </div>
           <h3>Quality first</h3>
-          <p>App quality is always the top priority — crafted interfaces that make people smile, not just apps that ship.</p>
+          <p>App quality is always the top priority: crafted interfaces that make people smile, not just apps that ship.</p>
         </div>
         <div class="feature-card reveal">
           <div class="feature-icon">
@@ -620,7 +620,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 01-8.9 8.4 8.6 8.6 0 01-3.8-1L3 20l1.2-5.3a8.4 8.4 0 01-1-3.9A8.4 8.4 0 0111.6 2a8.4 8.4 0 019.4 9.5z"/></svg>
           </div>
           <h3>Open source review</h3>
-          <p>Want to audit the code before launch? Reach out by email — transparency is part of who I am.</p>
+          <p>Want to audit the code before launch? Reach out by email. Transparency is part of who I am.</p>
         </div>
       </div>
     </div>
@@ -673,21 +673,21 @@
               How do I get started?
               <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
             </button>
-            <div class="faq-a"><p class="faq-a-inner">Visit the Play Store page and download the app you want. No account or sign-up needed — most apps are ready to use in under a minute.</p></div>
+            <div class="faq-a"><p class="faq-a-inner">Visit the Play Store page and download the app you want. No account or sign-up needed, most apps are ready to use in under a minute.</p></div>
           </div>
           <div class="faq-item" data-open="false">
             <button class="faq-q" aria-expanded="false">
               Are there any fees?
               <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
             </button>
-            <div class="faq-a"><p class="faq-a-inner">Core features are free. Some apps offer an optional one-time purchase for advanced features — pricing is always listed on the app's Play Store page.</p></div>
+            <div class="faq-a"><p class="faq-a-inner">Core features are free. Some apps offer an optional one-time purchase for advanced features, and pricing is always listed on the app's Play Store page.</p></div>
           </div>
           <div class="faq-item" data-open="false">
             <button class="faq-q" aria-expanded="false">
               Can I review the code before using an app?
               <span class="faq-chevron"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></span>
             </button>
-            <div class="faq-a"><p class="faq-a-inner">Yes. Get in touch by email and a code review can be arranged — security-minded developers are always welcome to take a look.</p></div>
+            <div class="faq-a"><p class="faq-a-inner">Yes. Get in touch by email and a code review can be arranged. Security-minded developers are always welcome to take a look.</p></div>
           </div>
         </div>
       </div>
@@ -785,7 +785,7 @@
     });
   });
 
-  // Scroll reveal — progressive enhancement only.
+  // Scroll reveal, progressive enhancement only.
   // Content is visible by default (see CSS); this just adds a
   // brief entrance transition where IntersectionObserver exists,
   // and never leaves anything permanently hidden.
