@@ -4,31 +4,35 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Cristi Media Group</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Zalando+Sans:wght@300..800&family=Zalando+Sans+Expanded:wght@500..800&display=swap" rel="stylesheet" />
 <meta name="description" content="Independent Android apps built by Cristi Media Group. Clean code, regular updates, apps people actually use." />
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg:        #ffffff;
-    --bg-alt:    #f5f5f7;
-    --ink:       #1d1d1f;
-    --ink-soft:  #424245;
-    --muted:     #86868b;
-    --line:      #d2d2d7;
-    --accent:    #5e5ce6;
-    --accent-ink:#4a48c4;
+    --bg:        #0b0612;
+    --bg-alt:    #130a1e;
+    --ink:       #f5f5f7;
+    --ink-soft:  #c4bfd0;
+    --muted:     #8b859a;
+    --line:      #2b2238;
+    --accent:    #6e6cf0;
+    --accent-ink:#8e8cf6;
+    --font:         "Zalando Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    --font-display: "Zalando Sans Expanded", "Zalando Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
     --radius-lg: 22px;
     --radius-md: 14px;
     --radius-sm: 10px;
   }
 
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; background: var(--bg); color-scheme: dark; }
 
   body {
     background: var(--bg);
     color: var(--ink);
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
-                 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: var(--font);
     font-size: 17px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
@@ -52,26 +56,29 @@
     border-radius: 4px;
   }
 
-  /* ─── Reveal-on-scroll, with a safe default ───
-     Content is visible by default. JS only ADDS a temporary
-     entrance transition, it never depends on JS to be seen. */
-  .reveal { opacity: 1; transform: none; }
-  .js-reveal-ready .reveal {
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity .5s ease, transform .5s ease;
+  /* ─── Typography: Zalando Sans body, Expanded for headlines ─── */
+  button, input { font-family: inherit; }
+  h1, h2, h3, .app-title, .section-title, .stat-num, .nav-logo, .footer-brand, .eyebrow {
+    font-family: var(--font-display);
   }
-  .js-reveal-ready .reveal.visible { opacity: 1; transform: none; }
+  .eyebrow { letter-spacing: .02em; }
 
-  @media (prefers-reduced-motion: reduce) {
-    .js-reveal-ready .reveal { opacity: 1; transform: none; transition: none; }
-    html { scroll-behavior: auto; }
+  /* ─── Fade-in per section ───
+     JS tags text blocks with .fade and adds .in to a section when it
+     scrolls into view. Without JS (or with reduced motion) nothing is hidden. */
+  .js-fade-ready section:not(.in) .fade { opacity: 0; }
+  .js-fade-ready section.in .fade {
+    animation: cmg-fade .8s cubic-bezier(.22, .8, .22, 1) backwards;
+    animation-delay: calc(var(--i, 0) * 80ms);
   }
+  @keyframes cmg-fade { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
   /* ─── NAV ─── */
   header.nav {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(255,255,255,.8);
+    background: rgba(11,6,18,.78);
     backdrop-filter: saturate(180%) blur(20px);
     -webkit-backdrop-filter: saturate(180%) blur(20px);
     border-bottom: 1px solid var(--line);
@@ -140,11 +147,29 @@
     z-index: 0;
     pointer-events: none;
     background:
-      radial-gradient(480px 360px at 22% 30%, rgba(94,92,230,.16), transparent 70%),
-      radial-gradient(420px 340px at 78% 15%, rgba(255,105,180,.12), transparent 70%),
-      radial-gradient(520px 400px at 55% 55%, rgba(0,199,190,.10), transparent 70%);
+      radial-gradient(480px 360px at 22% 30%, rgba(110,108,240,.14), transparent 70%),
+      radial-gradient(420px 340px at 78% 15%, rgba(255,105,180,.08), transparent 70%),
+      radial-gradient(520px 400px at 55% 55%, rgba(0,199,190,.05), transparent 70%);
     filter: blur(10px);
   }
+
+  /* ─── HERO FAN (plays once on load) ─── */
+  @property --cmg-k { syntax: "<number>"; inherits: true; initial-value: 1; }
+  .hero-fan {
+    position: absolute; left: 0; right: 0; bottom: 0; height: 85%;
+    z-index: 0; pointer-events: none; overflow: hidden;
+    -webkit-mask-image: linear-gradient(to top, #000 45%, transparent 100%);
+            mask-image: linear-gradient(to top, #000 45%, transparent 100%);
+  }
+  .cmg-fan-svg { width: 100%; height: 100%; display: block; }
+  .hero-fan .p {
+    transform-origin: 0 0;
+    transform: translate(300px, 1300px) rotate(calc(var(--a) * (0.4 + 0.6 * var(--cmg-k))));
+    animation: cmg-open 1.6s cubic-bezier(.22, .8, .22, 1) both;
+    animation-delay: var(--d);
+  }
+  @keyframes cmg-open { from { --cmg-k: 0; opacity: 0; } to { --cmg-k: 1; opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .hero-fan .p { animation: none; } }
 
   .hero-inner {
     position: relative; z-index: 1;
@@ -159,7 +184,7 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    max-width: 640px;
+    max-width: 760px;
   }
 
   .hero-badge {
@@ -179,10 +204,10 @@
   }
 
   h1 {
-    font-size: clamp(2.6rem, 5.4vw, 4rem);
+    font-size: clamp(2.2rem, 5vw, 3.6rem);
     font-weight: 700;
-    letter-spacing: -.025em;
-    line-height: 1.04;
+    letter-spacing: -.02em;
+    line-height: 1.08;
     margin-bottom: 22px;
   }
   h1 .accent-line {
@@ -241,7 +266,7 @@
     width: 230px;
     border-radius: 34px;
     overflow: hidden;
-    box-shadow: 0 30px 60px -12px rgba(0,0,0,.28), 0 0 0 1px rgba(0,0,0,.06);
+    box-shadow: 0 30px 60px -12px rgba(0,0,0,.7), 0 0 0 1px rgba(255,255,255,.08);
     background: var(--bg-alt);
   }
   .hero-devices .device img { width: 100%; display: block; }
@@ -323,7 +348,7 @@
   .app-screenshot {
     max-width: 260px; width: 100%;
     border-radius: 28px;
-    box-shadow: 0 20px 40px rgba(0,0,0,.12);
+    box-shadow: 0 20px 40px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.06);
   }
 
   /* ─── FEATURES ─── */
@@ -413,7 +438,8 @@
   /* ─── CTA ─── */
   .cta-section { padding: 96px 0; }
   .cta-box {
-    background: var(--ink);
+    background: linear-gradient(135deg, #1c0f30 0%, #2a1247 100%);
+    border: 1px solid var(--line);
     color: #fff;
     border-radius: var(--radius-lg);
     padding: 72px 32px;
@@ -424,9 +450,9 @@
     font-weight: 600; letter-spacing: -.02em;
     margin-bottom: 12px;
   }
-  .cta-box p { color: #a1a1a6; max-width: 420px; margin: 0 auto 32px; }
+  .cta-box p { color: #b9b4c6; max-width: 420px; margin: 0 auto 32px; }
   .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-  .cta-box .btn-primary { background: #fff; color: var(--ink); }
+  .cta-box .btn-primary { background: #fff; color: #0b0612; }
   .cta-box .btn-primary:hover { background: #e8e8ed; }
   .cta-box .btn-secondary { color: #fff; }
   .cta-box .btn-secondary:hover { color: #d1d1d6; }
@@ -511,6 +537,9 @@
   <!-- ─── HERO ─── -->
   <section class="hero">
     <div class="hero-mesh" aria-hidden="true"></div>
+    <div class="hero-fan" aria-hidden="true">
+<svg class="cmg-fan-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1238 920" preserveAspectRatio="xMidYMax slice"><defs><linearGradient id="cmgW0" x1="0" y1="0" x2="0.6" y2="1"><stop offset="0" stop-color="#a93a8f"/><stop offset="1" stop-color="#c1507f"/></linearGradient><linearGradient id="cmgW1" x1="0" y1="0" x2="0.6" y2="1"><stop offset="0" stop-color="#c1507f"/><stop offset="1" stop-color="#d96d65"/></linearGradient><linearGradient id="cmgW2" x1="0" y1="0" x2="0.6" y2="1"><stop offset="0" stop-color="#d96d65"/><stop offset="1" stop-color="#e98a4e"/></linearGradient><linearGradient id="cmgW3" x1="0" y1="0" x2="0.6" y2="1"><stop offset="0" stop-color="#e98a4e"/><stop offset="1" stop-color="#f0a040"/></linearGradient></defs><g class="p" style="--d:0ms;--a:6deg"><rect x="-360" y="-1230" width="720" height="1590" rx="324" fill="#1e0a30"/></g><g class="p" style="--d:70ms;--a:15.4deg"><rect x="-330" y="-1230" width="660" height="1560" rx="297" fill="#2a0d44"/></g><g class="p" style="--d:140ms;--a:26.6deg"><rect x="-320" y="-1245" width="640" height="1565" rx="288" fill="#3a125a"/></g><g class="p" style="--d:210ms;--a:35deg"><rect x="-315" y="-1240" width="630" height="1555" rx="284" fill="#4b1976"/></g><g class="p" style="--d:280ms;--a:42deg"><rect x="-310" y="-1215" width="620" height="1525" rx="279" fill="#5d2092"/></g><g class="p" style="--d:350ms;--a:51.4deg"><rect x="-305" y="-1220" width="610" height="1525" rx="274" fill="#7226ae"/></g><g class="p" style="--d:420ms;--a:56.6deg"><rect x="-300" y="-1150" width="600" height="1450" rx="270" fill="#8529c6"/></g><g class="p" style="--d:490ms;--a:63deg"><rect x="-290" y="-1100" width="580" height="1390" rx="261" fill="#9530da"/></g><g class="p" style="--d:560ms;--a:40deg"><rect x="-200" y="-805" width="400" height="1005" rx="180" fill="url(#cmgW0)"/></g><g class="p" style="--d:630ms;--a:45.8deg"><rect x="-195" y="-843" width="390" height="1038" rx="176" fill="url(#cmgW1)"/></g><g class="p" style="--d:700ms;--a:51.7deg"><rect x="-190" y="-879" width="380" height="1069" rx="171" fill="url(#cmgW2)"/></g><g class="p" style="--d:770ms;--a:56.7deg"><rect x="-185" y="-892" width="370" height="1077" rx="166" fill="url(#cmgW3)"/></g></svg>
+    </div>
     <div class="container hero-inner">
       <div class="hero-copy">
         <p class="hero-badge"><span class="dot"></span> Solo developer, Android apps since 2018</p>
@@ -784,29 +813,30 @@
     });
   });
 
-  // Scroll reveal, progressive enhancement only.
-  // Content is visible by default (see CSS); this just adds a
-  // brief entrance transition where IntersectionObserver exists,
-  // and never leaves anything permanently hidden.
+  // Per-section text fade-in on scroll (progressive enhancement:
+  // nothing is hidden unless JS runs and motion is allowed).
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.documentElement.classList.add('js-reveal-ready');
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
+    const sections = document.querySelectorAll('main section');
+    const targets = [
+      '.hero-badge', 'h1', '.hero-sub', '.hero-btns', '.hero-proof', '.hero-devices',
+      '.app-text > :not(.app-features)', '.app-features li', '.app-visual',
+      '.section-head > *', '.feature-card', '.stats-grid > div',
+      '.faq-grid > div:first-child > *', '.faq-item',
+      '.cta-box > h2', '.cta-box > p', '.cta-btns'
+    ].join(',');
+    sections.forEach(sec => {
+      sec.querySelectorAll(targets).forEach((el, i) => {
+        el.classList.add('fade');
+        el.style.setProperty('--i', Math.min(i, 9));
       });
-    }, { threshold: 0.12 });
-    reveals.forEach(el => observer.observe(el));
-
-    // Safety net: if anything is still unrevealed after 2s
-    // (observer never fired, tab was backgrounded, etc.),
-    // reveal it anyway rather than leave it hidden.
-    setTimeout(() => {
-      document.querySelectorAll('.reveal:not(.visible)').forEach(el => el.classList.add('visible'));
-    }, 2000);
+    });
+    document.documentElement.classList.add('js-fade-ready');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    sections.forEach(sec => io.observe(sec));
   }
 </script>
 </body>
